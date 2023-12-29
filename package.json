@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "check-commit": "commitlint --from=HEAD~1",
-    "commitlint": "commitlint -e"
+    "check-commit": "commitlint",
+    "commitlint": "commitlint --from=HEAD~1 --"
   },
   "devDependencies": {
-    "@commitlint/cli": "18.4.3",
-    "@commitlint/config-angular": "17.6.3"
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-angular": "^17.6.3"
   }
 }
