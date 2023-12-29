@@ -1,4 +1,18 @@
-  name: Validate Commits
-  uses: joberstein/actions-commitlint-validation@v1-dist
-  with:
-    extra_config: "@joberstein12/commitlint-config"
+name: Validate Commits
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate Commits
+        uses: joberstein/actions-commitlint-validation@v1-dist
+        with:
+          extra_config: "@joberstein12/commitlint-config"
