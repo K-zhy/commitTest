@@ -1,22 +1,23 @@
-name: Check Commit Message
+name: CommitLint
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  check-commit:
+  commitlint:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install dependencies
-      run: npm install
+      - name: Save commit message to file
+        run: echo "${{ github.event.before }}...${{ github.sha }}" > commit-message.txt
 
-    - name: Check commit message
-      run: npm run check-commit < "$(git log -1 --pretty=%B)"
+      - name: Run CommitLint
+        run: npm run check-commit < commit-message.txt
