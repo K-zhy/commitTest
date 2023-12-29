@@ -1,28 +1,4 @@
-name: CommitLint
-
-on:
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  commitlint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Save commit message to file
-        run: echo "${{ github.event.before }}...${{ github.sha }}" > commit-message.txt
-
-      - name: Run CommitLint
-        run: npm run check-commit < commit-message.txt
+- name: Validate Commits
+  uses: joberstein/actions-commitlint-validation@v1-dist
+  with:
+    extra_config: "@joberstein12/commitlint-config"
