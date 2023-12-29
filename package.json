@@ -4,7 +4,7 @@
     "commitlint": "commitlint -e"
   },
   "devDependencies": {
-    "@commitlint/cli": "^15.0.2",
-    "@commitlint/config-angular": "^15.0.1"
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-angular": "17.6.3"
   }
 }
