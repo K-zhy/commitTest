@@ -15,7 +15,10 @@ jobs:
       - name: Validate Commits
         run: |
           git fetch origin master
-          range="${{ github.event.before }}..${{ github.sha }}"
+          range="${{ github.event.before }}..${{ github.sha }}"  # Construct the commit range
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            range="${{ github.sha }}"  # If it's an initial commit, use the current commit only
+          fi
           git log --pretty=oneline $range
           git diff --name-only $range
         shell: bash
