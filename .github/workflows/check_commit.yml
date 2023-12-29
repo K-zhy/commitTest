@@ -16,3 +16,4 @@ jobs:
         uses: joberstein/actions-commitlint-validation@v1-dist
         with:
           extra_config: "@joberstein12/commitlint-config"
+          commit_range: "-- ${{ github.sha }}"
