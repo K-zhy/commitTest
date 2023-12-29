@@ -1,4 +1,4 @@
-- name: Validate Commits
+  name: Validate Commits
   uses: joberstein/actions-commitlint-validation@v1-dist
   with:
     extra_config: "@joberstein12/commitlint-config"
