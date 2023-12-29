@@ -1,4 +1,4 @@
-name: Validate Commits
+name: Simplified Validate Commits
 
 on:
   push:
@@ -12,13 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Validate Commits
+      - name: Display Git Info
         run: |
-          git fetch origin master
-          range="${{ github.event.before }}..${{ github.sha }}"  # Construct the commit range
-          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-            range="${{ github.sha }}"  # If it's an initial commit, use the current commit only
-          fi
-          git log --pretty=oneline $range
-          git diff --name-only $range
+          echo "GITHUB_SHA: $GITHUB_SHA"
+          git log --oneline -n 5
+          git diff --name-only $GITHUB_SHA^..$GITHUB_SHA
         shell: bash
