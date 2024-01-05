@@ -20,7 +20,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        npm install -g @commitlint/cli @commitlint/config-conventional
+        npm install -g @commitlint/cli @commitlint/config-conventional commitlint-plugin-mermaid
         npm install
 
     - name: Get Last Commit Message
@@ -31,4 +31,4 @@ jobs:
       run: echo "${{ steps.last_commit.outputs.commit_message }}" > commit_message.txt
 
     - name: Run Commitlint
-      run: npx commitlint --env EDITOR="cat" --from=${{ github.event.before }} --to=${{ github.sha }} -E commitlint-mermaid-preset
+      run: npx commitlint --from=${{ github.event.before }} --to=${{ github.sha }}
