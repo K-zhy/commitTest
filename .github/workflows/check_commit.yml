@@ -1,20 +1,27 @@
-name: Simplified Validate Commits
+name: Commitlint Check
 
 on:
   push:
     branches:
-      - master
+      - master # 更改为你的默认分支
 
 jobs:
-  validate-commits:
+  commitlint:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Display Git Info
-        run: |
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          git log --oneline -n 5
-          git diff --name-only $GITHUB_SHA^..$GITHUB_SHA
-        shell: bash
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install Dependencies
+      run: |
+        npm install -g @commitlint/cli @commitlint/config-conventional
+        npm install
+
+    - name: Run Commitlint
+      run: npx commitlint --from=${{ github.event.before }} --to=${{ github.sha }}
