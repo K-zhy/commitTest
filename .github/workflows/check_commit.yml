@@ -23,5 +23,9 @@ jobs:
         npm install -g @commitlint/cli @commitlint/config-conventional
         npm install
 
+    - name: Get Last Commit Message
+      id: last_commit
+      run: echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"
+
     - name: Run Commitlint
-      run: npx commitlint
+      run: npx commitlint --edit --from=${{ steps.last_commit.outputs.commit_message }}
