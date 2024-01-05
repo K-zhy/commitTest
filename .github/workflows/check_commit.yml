@@ -27,5 +27,8 @@ jobs:
       id: last_commit
       run: echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"
 
+    - name: Save Commit Message to File
+      run: echo "${{ steps.last_commit.outputs.commit_message }}" > commit_message.txt
+
     - name: Run Commitlint
-      run: npx commitlint --env EDITOR="echo ${{ steps.last_commit.outputs.commit_message }}"
+      run: npx commitlint --env EDITOR="cat" --from=${{ github.event.before }} --to=${{ github.sha }} -E commitlint-mermaid-preset
