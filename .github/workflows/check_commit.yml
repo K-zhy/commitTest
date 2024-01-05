@@ -27,9 +27,5 @@ jobs:
       id: last_commit
       run: echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"
 
-    - name: Create Temporary File
-      id: temp_file
-      run: echo "${{ steps.last_commit.outputs.commit_message }}" > temp_commit_message.txt
-
     - name: Run Commitlint
-      run: npx commitlint --edit --env EDITOR="cat ${{ steps.temp_file.outputs.temp_file }}"
+      run: npx commitlint --env EDITOR="echo ${{ steps.last_commit.outputs.commit_message }}"
