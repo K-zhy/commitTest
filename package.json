@@ -6,10 +6,8 @@
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-angular": "^17.6.3",
-    "commitlint-plugin-mermaid": "github:example-user/commitlint-plugin-mermaid"
-  },
-  
-  
+    "commitlint-plugin-mermaid": "git+https://github.com/<github-username>/commitlint-plugin-mermaid.git"
+  },  
   "commitlint": {
     "extends": ["@commitlint/config-conventional"],
     "plugins": ["commitlint-plugin-mermaid"]
